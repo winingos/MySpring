@@ -2,39 +2,47 @@ package cn.itcast.spring.dao.jdbc;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 @SuppressWarnings("unchecked")
 public class CustomerDao implements ICustomerDao {
-	private JdbcTemplate jt;
+	private NamedParameterJdbcTemplate jt;
 	
- public JdbcTemplate getJt() {
+ public NamedParameterJdbcTemplate getJt() {
 		return jt;
 	}
 
-	public void setJt(JdbcTemplate jt) {
+	public void setJt(NamedParameterJdbcTemplate jt) {
 		this.jt = jt;
 	}
 
 @Override
 public void insertCus(Customer c){
-	 String sql="insert into jdbcTable(name,age)values(?,?)"; 
-	 jt.update(sql,new Object[]{c.getName(),c.getAge()});
+	 String sql="insert into jdbcTable(name,age)values(:m,:n)"; 
+	 Map map=new HashMap();
+	 map.put("m", c.getName());
+	 map.put("n", c.getAge());
+	 jt.update(sql,map);
  }
 @Override
 public void updateCus(Customer c){
-	String sql="update jdbcTable set name=?,age=? where id=?"; 
-	jt.update(sql,new Object[]{c.getName(),c.getAge(),c.getId()});
+	String sql="update jdbcTable set name=:m,age=:n where id=:j"; 
+	 Map map=new HashMap();
+	 map.put("m", c.getName());
+	 map.put("n", c.getAge());
+	 map.put("j", c.getId());
+	jt.update(sql,map);
 }
 
 	public List<Customer> queryById(int id) {
-		String sql = "select * from jdbcTable where id=?";
-		return  jt.query(sql, new Object[] { id },
+		String sql = "select * from jdbcTable where id=:j";
+		Map map=new HashMap();
+		map.put("j", id);
+		return  jt.query(sql, map,
 				new RowMapper() {
 					
 					@Override
@@ -57,7 +65,7 @@ public void updateCus(Customer c){
 	@Override
 	public List<Customer> queryAll() {
 		String sql="select * from jdbcTable";
-		return (List<Customer>) jt.query(sql, new RowMapper() {
+		return (List<Customer>) jt.query(sql, new HashMap(),new RowMapper() {
 			
 			@Override
 			public Object mapRow(ResultSet rst,int rowcount) throws SQLException{
