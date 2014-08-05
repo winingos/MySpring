@@ -12,11 +12,11 @@ public class App {
 		ICustomerDao dao = (ICustomerDao)app.getBean("customerDao");
 		Customer c=new Customer();
 		c.setAge(23);
-		c.setName("jerry");
+		c.setName("test");
 		c.setId(1);
 //		dao.insertCus(c);
-//		dao.updateCus(c);
-//		List<Customer> l=dao.queryById(3);
+		dao.updateCus(c);
+		List<Customer> l=dao.queryById(3);
 		List<Customer> li=dao.queryAll();
 		System.out.println("");
 		
