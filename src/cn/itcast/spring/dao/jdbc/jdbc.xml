@@ -20,9 +20,11 @@
            	<property name="initialPoolSize" value="${c3p0.pool.size.ini}"/>
            	<property name="acquireIncrement" value="${c3p0.pool.size.increment}"/>
            </bean>
+           <!--将dataSource注入模板中-->
            <bean id="jt" class="org.springframework.jdbc.core.JdbcTemplate">
            	<property name="dataSource" ref="dataSource"/>
            </bean>
+           <!--将模板注入dao中-->
            <bean id="customerDao" class="cn.itcast.spring.dao.jdbc.CustomerDao">
            	<property name="jt" ref="jt"/>
            </bean>
