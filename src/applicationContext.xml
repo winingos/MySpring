@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+    <!-- 欢迎服务 -->
+    <bean id="greetingService" class="cn.itcast.spring.service.GreetingService">
+        <property name="greeting">
+            <value>hello world</value>
+        </property>
+        <property name="greeting2" value="tom" />
+        <property name="bs" ref="byeService" />
+    </bean>
+    <!-- 欢送服务 -->
+    <bean id="byeService" class="cn.itcast.spring.service.ByeService" init-method="ini">
+        <property name="bye">
+            <value>later</value>
+        </property>
+    </bean>
+      <!--注册bean后处理器-->
+     <bean id = "myProcessor" class="cn.itcast.spring.processor.MyProcessor"/>
+</beans>

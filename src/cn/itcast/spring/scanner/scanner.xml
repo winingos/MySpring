@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
+						http://www.springframework.org/schema/context 
+						http://www.springframework.org/schema/context/spring-context-2.5.xsd ">
+	  <!-- 自定义编辑器配置器 -->
+    <bean id="customEditorConfigurer" class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+    	 <!-- 自定义编辑器集 -->
+    	 <property name="customEditors">
+    	 	<map>
+    	 	<entry key="cn.itcast.spring.scanner.Address">
+    	 		<bean class="cn.itcast.spring.scanner.AddressEditor"/>
+    	 	</entry>
+    	 	<entry key="cn.itcast.spring.scanner.Person">
+    	 		<bean class="cn.itcast.spring.scanner.PersonEditor"/>
+    	 	</entry>
+    	 	</map>
+    	 </property>
+    </bean>
+	 <bean id="scanner" class="cn.itcast.spring.scanner.Scanner">
+        <property name="driverClass" value="${jdbc.driverclass}" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+        
+         <!--  -->
+        <property name="comAddress">
+            <bean class="cn.itcast.spring.scanner.Address">
+                <property name="province" value="jilin" />
+                <property name="city" value="cc" />
+                <property name="street" value="${jdbc.url}" />
+            </bean>
+        </property>
+        <property name="homeAddress">
+            <value>${jdbc.driverclass}-cc-renmin-139988</value>
+        </property>
+        <property name="empPerson">
+            <value>${jdbc.password},34,hotGril</value>
+        </property>
+    </bean>
+   
+	<!-- 分散配置,加载分散配置的文件 -->
+    <context:property-placeholder location="classpath:cn/itcast/spring/scanner/jdbc.properties"/>
+</beans>
