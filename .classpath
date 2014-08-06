@@ -3,12 +3,21 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/spring"/>
-	<classpathentry kind="lib" path="E:/java/java就业班/spring/lsn_spring/lib/commons-logging.jar"/>
-	<classpathentry kind="lib" path="E:/java/java就业班/spring/lsn_spring/lib/cglib-nodep-2.1_3.jar"/>
-	<classpathentry kind="lib" path="E:/java/java就业班/spring/lsn_spring/lib/aspectjrt.jar"/>
-	<classpathentry kind="lib" path="E:/java/java就业班/spring/lsn_spring/lib/aspectjweaver.jar"/>
-	<classpathentry kind="lib" path="E:/java/java就业班/spring/lsn_spring/lib/c3p0-0.9.1.2.jar"/>
-	<classpathentry kind="lib" path="E:/java/java就业班/spring/lsn_spring/lib/mysql-connector-java-5.0.8-bin.jar"/>
-	<classpathentry kind="lib" path="E:/java/java就业班/43spring(徐培成)/lsn_spring1/lib/spring.jar"/>
+	<classpathentry kind="lib" path="E:/java/java就业班/44spring(徐培成)/44spring(徐培成)/lsn_spring/lib/antlr-2.7.6.jar"/>
+	<classpathentry kind="lib" path="E:/java/java就业班/44spring(徐培成)/44spring(徐培成)/lsn_spring/lib/aspectjrt.jar"/>
+	<classpathentry kind="lib" path="E:/java/java就业班/44spring(徐培成)/44spring(徐培成)/lsn_spring/lib/aspectjweaver.jar"/>
+	<classpathentry kind="lib" path="E:/java/java就业班/44spring(徐培成)/44spring(徐培成)/lsn_spring/lib/c3p0-0.9.1.2.jar"/>
+	<classpathentry kind="lib" path="E:/java/java就业班/44spring(徐培成)/44spring(徐培成)/lsn_spring/lib/cglib-nodep-2.1_3.jar"/>
+	<classpathentry kind="lib" path="E:/java/java就业班/44spring(徐培成)/44spring(徐培成)/lsn_spring/lib/commons-collections-3.1.jar"/>
+	<classpathentry kind="lib" path="E:/java/java就业班/44spring(徐培成)/44spring(徐培成)/lsn_spring/lib/commons-logging.jar"/>
+	<classpathentry kind="lib" path="E:/java/java就业班/44spring(徐培成)/44spring(徐培成)/lsn_spring/lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="E:/java/java就业班/44spring(徐培成)/44spring(徐培成)/lsn_spring/lib/hibernate3.jar"/>
+	<classpathentry kind="lib" path="E:/java/java就业班/44spring(徐培成)/44spring(徐培成)/lsn_spring/lib/javassist-3.9.0.GA.jar"/>
+	<classpathentry kind="lib" path="E:/java/java就业班/44spring(徐培成)/44spring(徐培成)/lsn_spring/lib/jta-1.1.jar"/>
+	<classpathentry kind="lib" path="E:/java/java就业班/44spring(徐培成)/44spring(徐培成)/lsn_spring/lib/mysql-connector-java-5.0.8-bin.jar"/>
+	<classpathentry kind="lib" path="E:/java/java就业班/44spring(徐培成)/44spring(徐培成)/lsn_spring/lib/slf4j-api-1.5.8.jar"/>
+	<classpathentry kind="lib" path="E:/java/java就业班/44spring(徐培成)/44spring(徐培成)/lsn_spring/lib/slf4j-log4j12-1.5.0.jar"/>
+	<classpathentry kind="lib" path="E:/java/java就业班/44spring(徐培成)/44spring(徐培成)/lsn_spring/lib/spring.jar"/>
+	<classpathentry kind="lib" path="E:/java/java就业班/44spring(徐培成)/44spring(徐培成)/lsn_spring/lib/log4j-1.2.15.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
