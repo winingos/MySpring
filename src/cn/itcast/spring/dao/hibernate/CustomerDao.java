@@ -1,7 +1,12 @@
 package cn.itcast.spring.dao.hibernate;
 
+import java.sql.SQLException;
 import java.util.List;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
 import cn.itcast.spring.domain.Customer;
@@ -32,5 +37,23 @@ public void updateCus(Customer c){
 	public List<Customer> queryAll() {
 		String hql="from Customer";
 		return ht.find(hql);
+	}
+//  在dao层面进行实务的管理
+	@Override
+	public void updateBat(final List<Customer> lc) {
+		ht.execute(new HibernateCallback() {
+			
+			@Override
+			public Object doInHibernate(Session session) throws HibernateException,
+					SQLException {
+				Transaction  tx =session.beginTransaction();
+				for (Customer c : lc) {
+					session.save(c);
+				}
+				tx.commit();
+				return null;
+			}
+		});
+		
 	}
 }
