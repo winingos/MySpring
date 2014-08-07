@@ -14,5 +14,7 @@ public interface ICustomerDao {
 	public List<Customer> queryById(int id) ;
 	
 	public List<Customer> queryAll();
+	
+	public void updateBat(List<Customer> lc );
 
 }
