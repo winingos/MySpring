@@ -41,11 +41,13 @@ public void updateCus(Customer c){
 //  在dao层面进行实务的管理
 	@Override
 	public void updateBat(final List<Customer> lc) {
+//		接口回调
 		ht.execute(new HibernateCallback() {
 			
 			@Override
 			public Object doInHibernate(Session session) throws HibernateException,
 					SQLException {
+//				显式开启实务，实现事务管理。
 				Transaction  tx =session.beginTransaction();
 				for (Customer c : lc) {
 					session.save(c);

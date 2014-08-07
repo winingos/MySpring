@@ -36,8 +36,7 @@
 	            <list>
 	                <value>classpath:cn/itcast/spring/domain/Customer.hbm.xml</value>
 	            </list>
-	        </property>
-	         -->
+	        </property>-->
 	         <!--映射资源文件的位置集-->
 	        <property name="mappingDirectoryLocations">
 	            <list>
