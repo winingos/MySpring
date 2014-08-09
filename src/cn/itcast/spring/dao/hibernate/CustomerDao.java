@@ -39,7 +39,6 @@ public void updateCus(Customer c){
 		return ht.find(hql);
 	}
 //  在dao层面进行实务的管理
-	@Override
 	public void updateBat(final List<Customer> lc) {
 //		接口回调
 		ht.execute(new HibernateCallback() {
