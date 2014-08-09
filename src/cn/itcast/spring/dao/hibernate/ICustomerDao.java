@@ -15,6 +15,6 @@ public interface ICustomerDao {
 	
 	public List<Customer> queryAll();
 	
-	public void updateBat(List<Customer> lc );
+//	public void updateBat(List<Customer> lc );
 
 }
