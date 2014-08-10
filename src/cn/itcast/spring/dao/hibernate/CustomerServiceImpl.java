@@ -2,6 +2,7 @@ package cn.itcast.spring.dao.hibernate;
 
 import java.util.List;
 
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -17,7 +18,6 @@ public class CustomerServiceImpl implements CustomerDaoService {
 	public void setTt(TransactionTemplate tt) {
 		this.tt = tt;
 	}
-
 	//×¢Èëdao
 	public void setDao(CustomerDao dao) {
 		this.dao = dao;
@@ -47,8 +47,6 @@ public class CustomerServiceImpl implements CustomerDaoService {
 				return null;
 			}
 		});
-		
-		
 	}
 	 
 }
