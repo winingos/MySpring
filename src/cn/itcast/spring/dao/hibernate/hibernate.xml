@@ -51,15 +51,7 @@
 	        </property>
 	        -->
            </bean>
-           <!-- hibernate事务管理器,在service层面上实现事务管理,而且达到平台无关性 -->
-           <bean id="htm" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
-           	<property name="sessionFactory" ref="sessionFactory"/>
-           </bean>
-           <!-- 事务模板,封装了事务管理的样板代码 -->
-           <bean id="tt" class="org.springframework.transaction.support.TransactionTemplate">
-           	<property name="transactionManager" ref="htm"/>
-           </bean>
-           <!-- hibernate模板,封装样板代码 -->
+            <!-- hibernate模板,封装样板代码 -->
 		    <bean id="ht" class="org.springframework.orm.hibernate3.HibernateTemplate">
 		        <property name="sessionFactory" ref="sessionFactory" />
 		    </bean>
@@ -67,8 +59,43 @@
            <bean id="customerDao" class="cn.itcast.spring.dao.hibernate.CustomerDao">
            	<property name="ht" ref="ht"/>
            </bean>
-           <bean id="CustomerDaoService" class="cn.itcast.spring.dao.hibernate.CustomerServiceImpl">
+           <!-- hibernate事务管理器,在service层面上实现事务管理,而且达到平台无关性 -->
+           <bean id="htm" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+           	<property name="sessionFactory" ref="sessionFactory"/>
+           </bean>
+           <!-- 事务模板,封装了事务管理的样板代码
+           <bean id="tt" class="org.springframework.transaction.support.TransactionTemplate">
+           	<property name="transactionManager" ref="htm"/>
+           </bean> -->
+           <!-- 客户service目标对象 -->
+           <bean id="customerServiceTarget" class="cn.itcast.spring.dao.hibernate.CustomerServiceImpl">
            	<property name="dao" ref="customerDao"/>
-           	<property name="tt" ref="tt"/>
+           	<!-- <property name="tt" ref="tt"/> -->
+           </bean>
+           <!-- service代理对象 -->
+           <bean id="customerService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+           	<property name="target" ref="customerServiceTarget"/>
+           	<!-- 注入事务管理器 -->
+           	<property name="transactionManager" ref="htm"/>
+           	<property name="proxyInterfaces">
+           		<list>
+           			<value>cn.itcast.spring.dao.hibernate.CustomerDaoService</value>
+           		</list>
+           	</property>
+           	<!-- 事务属性源（事务的策略） -->
+           	<property name="transactionAttributes">
+           		<props>
+           			<prop key="save*">PROPAGATION_REQUIRED,ISOLATION_DEFAULT</prop>
+	                <prop key="update*">PROPAGATION_REQUIRED,ISOLATION_DEFAULT</prop>
+	                <prop key="delete*">PROPAGATION_REQUIRED,ISOLATION_DEFAULT</prop>
+	                <prop key="insert*">PROPAGATION_REQUIRED,ISOLATION_DEFAULT</prop>
+	                
+	                <prop key="load*">PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly</prop>
+	                <prop key="get*">PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly</prop>
+	                <prop key="find*">PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly</prop>
+	                
+	                <prop key="*">PROPAGATION_REQUIRED,ISOLATION_DEFAULT</prop>
+           		</props>
+           	</property>
            </bean>
 </beans>
