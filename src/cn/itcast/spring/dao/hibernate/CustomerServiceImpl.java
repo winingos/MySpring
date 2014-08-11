@@ -32,21 +32,22 @@ public class CustomerServiceImpl implements CustomerDaoService {
 	}
 	@Override
 	public void addList(final List<Customer> lc){
-		tt.execute(new TransactionCallback() {
-			
-			@Override
-			public Object doInTransaction(TransactionStatus status) {
-				try {
-					for (Customer c : lc) {
-						dao.insertCus(c);
-					}
-				} catch (Exception e) {
-					e.printStackTrace();
-					status.isRollbackOnly();
-				}
-				return null;
-			}
-		});
+		for (Customer c : lc) {
+			dao.insertCus(c);
+		}
+//		tt.execute(new TransactionCallback() {
+//			
+//			@Override
+//			public Object doInTransaction(TransactionStatus status) {
+//				try {
+//					
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//					status.isRollbackOnly();
+//				}
+//				return null;
+//			}
+//		});
 	}
 	 
 }
