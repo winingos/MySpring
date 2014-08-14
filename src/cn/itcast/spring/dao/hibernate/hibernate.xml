@@ -71,17 +71,12 @@
            <bean id="customerServiceTarget" class="cn.itcast.spring.dao.hibernate.CustomerServiceImpl">
            	<property name="dao" ref="customerDao"/>
            	<!-- <property name="tt" ref="tt"/> -->
+           		
            </bean>
-           <!-- service代理对象 -->
-           <bean id="customerService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
-           	<property name="target" ref="customerServiceTarget"/>
-           	<!-- 注入事务管理器 -->
+           <!--定义抽象事务代理工厂，专门用于继承-->
+           <bean id="txAbstract" lazy-init="true" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+           		<!-- 注入事务管理器 -->
            	<property name="transactionManager" ref="htm"/>
-           	<property name="proxyInterfaces">
-           		<list>
-           			<value>cn.itcast.spring.dao.hibernate.CustomerDaoService</value>
-           		</list>
-           	</property>
            	<!-- 事务属性源（事务的策略） -->
            	<property name="transactionAttributes">
            		<props>
@@ -97,5 +92,15 @@
 	                <prop key="*">PROPAGATION_REQUIRED,ISOLATION_DEFAULT</prop>
            		</props>
            	</property>
+           </bean>
+           <!-- service代理对象 -->
+           <bean id="customerService" parent="txAbstract">
+           	<property name="target" ref="customerServiceTarget"/>
+           	<property name="proxyInterfaces">
+           		<list>
+           			<value>cn.itcast.spring.dao.hibernate.CustomerDaoService</value>
+           		</list>
+           	</property>
+           
            </bean>
 </beans>
