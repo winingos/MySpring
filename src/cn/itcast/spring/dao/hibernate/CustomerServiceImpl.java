@@ -2,6 +2,7 @@ package cn.itcast.spring.dao.hibernate;
 
 import java.util.List;
 
+import org.springframework.aop.framework.AopContext;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallback;
@@ -13,11 +14,11 @@ public class CustomerServiceImpl implements CustomerDaoService {
 //	dao
 	private ICustomerDao dao;
 //	事务模板,封装事务管理的样板代码
-	private TransactionTemplate tt ;
-	//注入事务模板
-	public void setTt(TransactionTemplate tt) {
-		this.tt = tt;
-	}
+//	private TransactionTemplate tt ;
+//	//注入事务模板
+//	public void setTt(TransactionTemplate tt) {
+//		this.tt = tt;
+//	}
 	//注入dao
 	public void setDao(CustomerDao dao) {
 		this.dao = dao;
@@ -32,8 +33,9 @@ public class CustomerServiceImpl implements CustomerDaoService {
 	}
 	@Override
 	public void addList(final List<Customer> lc){
+		CustomerDaoService  proxy=(CustomerDaoService) AopContext.currentProxy();
 		for (Customer c : lc) {
-			dao.insertCus(c);
+			proxy.save(c);
 		}
 //		tt.execute(new TransactionCallback() {
 //			
