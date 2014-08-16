@@ -33,9 +33,8 @@ public class CustomerServiceImpl implements CustomerDaoService {
 	}
 	@Override
 	public void addList(final List<Customer> lc){
-		CustomerDaoService  proxy=(CustomerDaoService) AopContext.currentProxy();
 		for (Customer c : lc) {
-			proxy.save(c);
+			this.save(c);
 		}
 //		tt.execute(new TransactionCallback() {
 //			
