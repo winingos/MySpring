@@ -80,10 +80,11 @@
            	<!-- 事务属性源（事务的策略） -->
            	<property name="transactionAttributes">
            		<props>
-           			<prop key="save*">PROPAGATION_REQUIRED,ISOLATION_DEFAULT</prop>
+           			<prop key="save*">PROPAGATION_REQUIRES_NEW,ISOLATION_DEFAULT</prop>
 	                <prop key="update*">PROPAGATION_REQUIRED,ISOLATION_DEFAULT</prop>
 	                <prop key="delete*">PROPAGATION_REQUIRED,ISOLATION_DEFAULT</prop>
 	                <prop key="insert*">PROPAGATION_REQUIRED,ISOLATION_DEFAULT</prop>
+	                <prop key="add*">PROPAGATION_REQUIRED,ISOLATION_DEFAULT</prop>
 	                
 	                <prop key="load*">PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly</prop>
 	                <prop key="get*">PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly</prop>
@@ -96,6 +97,8 @@
            <!-- service代理对象 -->
            <bean id="customerService" parent="txAbstract">
            	<property name="target" ref="customerServiceTarget"/>
+           	<!-- 暴露代理将代理对象绑定到当前线程中 -->
+           	<property name="exposeProxy" value="true"></property>
            	<property name="proxyInterfaces">
            		<list>
            			<value>cn.itcast.spring.dao.hibernate.CustomerDaoService</value>
