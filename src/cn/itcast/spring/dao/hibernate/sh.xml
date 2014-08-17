@@ -44,18 +44,14 @@
 	            </list>
 	        </property>
            </bean>
-            <!-- hibernate模板,封装样板代码 -->
-		    <bean id="ht" class="org.springframework.orm.hibernate3.HibernateTemplate">
-		        <property name="sessionFactory" ref="sessionFactory" />
-		    </bean>
-           <!--将模板注入dao中-->
+           <!--将sessionFactory注入dao中-->
            <bean id="customerDao" class="cn.itcast.spring.dao.hibernate.CustomerDao">
-           	<property name="ht" ref="ht"/>
+           	<property name="sf" ref="sessionFactory"/>
            </bean>
            <bean id="htm" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
            	<property name="sessionFactory" ref="sessionFactory"/>
            </bean>
-            <!-- service代理对象 -->
+            <!-- customerService -->
            <bean id="customerService" class="cn.itcast.spring.dao.hibernate.CustomerServiceImpl">
            	<property name="dao" ref="customerDao"/>
            </bean>
@@ -73,7 +69,7 @@
            		<tx:method name="load*" propagation="REQUIRED" isolation="DEFAULT" read-only="true"/>
            		<tx:method name="query*" propagation="REQUIRED" isolation="DEFAULT" read-only="true"/>
            		<tx:method name="get*" propagation="REQUIRED" isolation="DEFAULT" read-only="true"/>
-           		<tx:method name="*" propagation="SUPPORTS" isolation="DEFAULT" read-only="false"/>
+           		<tx:method name="*" propagation="REQUIRED" isolation="DEFAULT" read-only="false"/>
            	</tx:attributes>
            </tx:advice>
            <!-- 创建切入点通知 -->
